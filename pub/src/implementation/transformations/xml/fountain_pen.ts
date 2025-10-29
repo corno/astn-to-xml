@@ -7,6 +7,8 @@ import * as d_in from "../../../interface/generated/pareto/schemas/xml/data_type
 import * as sh from "pareto-fountain-pen/dist/shorthands/block"
 
 import { $$ as op_dictionary_to_list } from "pareto-standard-operations/dist/operations/impure/dictionary/to_list_sorted_by_code_point"
+import { Signature } from "../../../interface/algorithms/transformations/xml/fountain_pen"
+
 
 // XML Schema Type transformations - each type from the schema needs a function
 export const XML_Document = (

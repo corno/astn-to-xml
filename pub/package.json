@@ -1,6 +1,7 @@
 {
+  "name": "astn-to-git",
   "dependencies": {
     "exupery-core-dev": "^0.1.3",
-    "pareto-fountain-pen": "^0.1.39"
+    "pareto-fountain-pen": "^0.1.41"
   }
 }
