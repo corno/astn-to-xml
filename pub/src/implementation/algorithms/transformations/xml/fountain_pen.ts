@@ -1,13 +1,14 @@
-import * as pa from 'exupery-core-alg'
-import * as pd from 'exupery-core-dev'
+import * as _ea from 'exupery-core-alg'
+import * as _ed from 'exupery-core-dev'
 
-import * as d_out from "pareto-fountain-pen/dist/generated/interface/schemas/block/data_types/target"
-import * as d_in from "../../../interface/generated/pareto/schemas/xml/data_types/source"
+import * as d_out from "pareto-fountain-pen/dist/interface/generated/pareto/schemas/block/data_types/target"
+import * as d_in from "../../../../interface/generated/pareto/schemas/xml/data_types/source"
 
 import * as sh from "pareto-fountain-pen/dist/shorthands/block"
 
-import { $$ as op_dictionary_to_list } from "pareto-standard-operations/dist/operations/impure/dictionary/to_list_sorted_by_code_point"
-import { Signature } from "../../../interface/algorithms/transformations/xml/fountain_pen"
+import { $$ as op_dictionary_to_list } from "pareto-standard-operations/dist/implementation/operations/impure/dictionary/to_list_sorted_by_code_point"
+import { $$ as op_list_is_empty } from "pareto-standard-operations/dist/implementation/operations/impure/list/is_empty"
+import { Signature } from "../../../../interface/algorithms/transformations/xml/fountain_pen"
 
 
 // XML Schema Type transformations - each type from the schema needs a function
@@ -70,19 +71,19 @@ export const XML_Element = (
         () => $.name
     )
     
-    const hasContent = pa.cc($.content, (content) => {
+    const hasContent = _ea.cc($.content, (content) => {
         switch (content[0]) {
-            case 'empty': return pa.ss(content, () => false)
-            case 'text only': return pa.ss(content, () => true)
-            case 'elements only': return pa.ss(content, (elements) => Object.keys(elements).length > 0)
-            case 'mixed': return pa.ss(content, (nodes) => Object.keys(nodes).length > 0)
-            default: return pa.au(content[0])
+            case 'empty': return _ea.ss(content, () => false)
+            case 'text only': return _ea.ss(content, () => true)
+            case 'elements only': return _ea.ss(content, (elements) => !op_list_is_empty(elements))
+            case 'mixed': return _ea.ss(content, (nodes) => !op_list_is_empty(nodes))
+            default: return _ea.au(content[0])
         }
     })
 
-    return pa.cc($p.formatting, (formatting) => {
+    return _ea.cc($p.formatting, (formatting) => {
         switch (formatting[0]) {
-            case 'compact': return pa.ss(formatting, () => 
+            case 'compact': return _ea.ss(formatting, () => 
                 $['self closing'] && !hasContent
                     ? sh.g.nested_block([
                         sh.b.snippet("<"),
@@ -105,7 +106,7 @@ export const XML_Element = (
                         ])
                     ])
             )
-            case 'pretty': return pa.ss(formatting, (pretty) => 
+            case 'pretty': return _ea.ss(formatting, (pretty) => 
                 $['self closing'] && !hasContent
                     ? sh.g.nested_block([
                         sh.b.snippet("<"),
@@ -130,7 +131,7 @@ export const XML_Element = (
                         ])
                     ])
             )
-            case 'custom': return pa.ss(formatting, (custom) => 
+            case 'custom': return _ea.ss(formatting, (custom) => 
                 $['self closing'] && !hasContent
                     ? sh.g.nested_block([
                         custom['before element'].transform(
@@ -169,7 +170,7 @@ export const XML_Element = (
                         ])
                     ])
             )
-            default: return pa.au(formatting[0])
+            default: return _ea.au(formatting[0])
         }
     })
 }
@@ -193,19 +194,19 @@ export const XML_Content = (
     $p: {
         'formatting': d_in.XML_Formatting_Options
     }
-): d_out.Group_Part => pa.cc($, (content) => {
+): d_out.Group_Part => _ea.cc($, (content) => {
     switch (content[0]) {
-        case 'empty': return pa.ss(content, () => sh.g.nothing())
-        case 'text only': return pa.ss(content, (textContent) => 
+        case 'empty': return _ea.ss(content, () => sh.g.nothing())
+        case 'text only': return _ea.ss(content, (textContent) => 
             XML_Text_Content(textContent, $p)
         )
-        case 'elements only': return pa.ss(content, (elements) => 
+        case 'elements only': return _ea.ss(content, (elements) => 
             sh.g.sub(elements.map((element) => XML_Element(element, $p)))
         )
-        case 'mixed': return pa.ss(content, (nodes) => 
+        case 'mixed': return _ea.ss(content, (nodes) => 
             sh.g.sub(nodes.map((node) => XML_Node(node, $p)))
         )
-        default: return pa.au(content[0])
+        default: return _ea.au(content[0])
     }
 })
 
@@ -215,22 +216,22 @@ export const XML_Text_Content = (
         'formatting': d_in.XML_Formatting_Options
     }
 ): d_out.Group_Part => {
-    return pa.cc($.escape, (escapeType) => {
+    return _ea.cc($.escape, (escapeType) => {
         switch (escapeType[0]) {
-            case 'auto': return pa.ss(escapeType, () => 
+            case 'auto': return _ea.ss(escapeType, () => 
                 sh.g.nested_block([ sh.b.snippet(escapeXmlText($.value))])
             )
-            case 'cdata': return pa.ss(escapeType, () => 
+            case 'cdata': return _ea.ss(escapeType, () => 
                 sh.g.nested_block([
                     sh.b.snippet("<![CDATA["),
                     sh.b.snippet($.value),
                     sh.b.snippet("]]>")
                 ])
             )
-            case 'none': return pa.ss(escapeType, () => 
+            case 'none': return _ea.ss(escapeType, () => 
                 sh.g.nested_block([ sh.b.snippet($.value)])
             )
-            default: return pa.au(escapeType[0])
+            default: return _ea.au(escapeType[0])
         }
     })
 }
@@ -240,28 +241,28 @@ export const XML_Node = (
     $p: {
         'formatting': d_in.XML_Formatting_Options
     }
-): d_out.Group_Part => pa.cc($, (node) => {
+): d_out.Group_Part => _ea.cc($, (node) => {
     switch (node[0]) {
-        case 'element': return pa.ss(node, (element) => XML_Element(element, $p))
-        case 'text': return pa.ss(node, (text) => XML_Text_Content(text, $p))
-        case 'comment': return pa.ss(node, (comment) => 
+        case 'element': return _ea.ss(node, (element) => XML_Element(element, $p))
+        case 'text': return _ea.ss(node, (text) => XML_Text_Content(text, $p))
+        case 'comment': return _ea.ss(node, (comment) => 
             sh.g.nested_block([
                 sh.b.snippet("<!-- "),
                 sh.b.snippet(comment.content),
                 sh.b.snippet(" -->")
             ])
         )
-        case 'cdata': return pa.ss(node, (cdata) => 
+        case 'cdata': return _ea.ss(node, (cdata) => 
             sh.g.nested_block([
                 sh.b.snippet("<![CDATA["),
                 sh.b.snippet(cdata.content),
                 sh.b.snippet("]]>")
             ])
         )
-        case 'processing instruction': return pa.ss(node, (pi) => 
+        case 'processing instruction': return _ea.ss(node, (pi) => 
             Processing_Instruction(pi, $p)
         )
-        default: return pa.au(node[0])
+        default: return _ea.au(node[0])
     }
 })
 
@@ -291,35 +292,37 @@ export const XML_Formatting_Options = (
         // no additional formatting params needed for formatting options itself
     }
 ): d_out.Group_Part => {
-    return pa.cc($, (formatting) => {
+    return _ea.cc($, (formatting) => {
         switch (formatting[0]) {
-            case 'compact': return pa.ss(formatting, () => 
+            case 'compact': return _ea.ss(formatting, () => 
                 sh.g.nested_block([ sh.b.snippet("compact formatting")])
             )
-            case 'pretty': return pa.ss(formatting, (pretty) => 
+            case 'pretty': return _ea.ss(formatting, (pretty) => 
                 sh.g.nested_block([ sh.b.snippet("pretty formatting with indent: " + pretty.indent)])
             )
-            case 'custom': return pa.ss(formatting, (custom) => 
+            case 'custom': return _ea.ss(formatting, (custom) => 
                 sh.g.nested_block([ sh.b.snippet("custom formatting")])
             )
-            default: return pa.au(formatting[0])
+            default: return _ea.au(formatting[0])
         }
     })
 }
 
 // XML escaping helper functions
 const escapeXmlText = (text: string): string => {
-    return text
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
+    return _ed.implement_me()
+    // return text
+    //     .replace(/&/g, '&amp;')
+    //     .replace(/</g, '&lt;')
+    //     .replace(/>/g, '&gt;')
 }
 
 const escapeXmlAttribute = (text: string): string => {
-    return text
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&apos;')
+    return _ed.implement_me()
+    // return text
+    //     .replace(/&/g, '&amp;')
+    //     .replace(/</g, '&lt;')
+    //     .replace(/>/g, '&gt;')
+    //     .replace(/"/g, '&quot;')
+    //     .replace(/'/g, '&apos;')
 }
