@@ -1,5 +1,5 @@
 {
-  "name": "astn-to-git",
+  "name": "astn-to-xml",
   "dependencies": {
     "exupery-core-dev": "^0.1.3",
     "pareto-fountain-pen": "^0.1.41"
