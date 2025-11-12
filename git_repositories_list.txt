@@ -1,8 +1,0 @@
-Repository: astn-to-xml
-Path: /home/corno/workspace/pareto-canon/packages/astn-to-xml
-Last Commit: 2025-11-07 (8238e9f)
-Message: updated to latest core
-Branch: main
-Remote: git@github.com:corno/astn-to-xml
--------------------------------------------------
-
