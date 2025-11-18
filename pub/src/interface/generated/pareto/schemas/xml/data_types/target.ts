@@ -1,4 +1,4 @@
-import * as _pt from 'exupery-core-types'
+import * as _et from 'exupery-core-types'
 
 import * as _i_core from "../../../core/unconstrained"
 
@@ -16,7 +16,7 @@ export type _T_XML_Text_Content = {
 
 export type _T_Processing_Instruction = {
     readonly 'target': string
-    readonly 'data': _pt.Optional_Value<string>
+    readonly 'data': _et.Optional_Value<string>
 }
 
 export type _T_XML_Node = _i_core._T_State_Group<null, 
@@ -40,21 +40,21 @@ export type _T_XML_Content = _i_core._T_State_Group<null,
 
 export type _T_XML_Element = {
     readonly 'name': string
-    readonly 'namespace': _pt.Optional_Value<string>
-    readonly 'prefix': _pt.Optional_Value<string>
+    readonly 'namespace': _et.Optional_Value<string>
+    readonly 'prefix': _et.Optional_Value<string>
     readonly 'attributes': _i_core._T_Dictionary<null, {
         readonly 'value': string
-        readonly 'namespace': _pt.Optional_Value<string>
+        readonly 'namespace': _et.Optional_Value<string>
     }>
     readonly 'content': _T_XML_Content
     readonly 'self closing': boolean
 }
 
 export type _T_XML_Document = {
-    readonly 'declaration': _pt.Optional_Value<{
+    readonly 'declaration': _et.Optional_Value<{
         readonly 'version': string
-        readonly 'encoding': _pt.Optional_Value<string>
-        readonly 'standalone': _pt.Optional_Value<boolean>
+        readonly 'encoding': _et.Optional_Value<string>
+        readonly 'standalone': _et.Optional_Value<boolean>
     }>
     readonly 'root element': _T_XML_Element
     readonly 'processing instructions': _i_core._T_List<null, _T_Processing_Instruction>
@@ -64,14 +64,14 @@ export type _T_XML_Formatting_Options = _i_core._T_State_Group<null,
     | readonly ['compact', null]
     | readonly ['pretty', {
         readonly 'indent': string
-        readonly 'max line length': _pt.Optional_Value<number>
+        readonly 'max line length': _et.Optional_Value<number>
         readonly 'preserve mixed content': boolean
     }]
     | readonly ['custom', {
-        readonly 'before element': _pt.Optional_Value<string>
-        readonly 'after element': _pt.Optional_Value<string>
-        readonly 'before attribute': _pt.Optional_Value<string>
-        readonly 'after attribute': _pt.Optional_Value<string>
+        readonly 'before element': _et.Optional_Value<string>
+        readonly 'after element': _et.Optional_Value<string>
+        readonly 'before attribute': _et.Optional_Value<string>
+        readonly 'after attribute': _et.Optional_Value<string>
     }]
 >
 
@@ -131,7 +131,7 @@ export namespace _T_Processing_Instruction {
     export namespace data {
         export type O = string
     }
-    export type data = _pt.Optional_Value<string>
+    export type data = _et.Optional_Value<string>
 }
 
 export namespace _T_XML_Node {
@@ -217,12 +217,12 @@ export namespace _T_XML_Element {
     export namespace namespace {
         export type O = string
     }
-    export type namespace = _pt.Optional_Value<string>
+    export type namespace = _et.Optional_Value<string>
     
     export namespace prefix {
         export type O = string
     }
-    export type prefix = _pt.Optional_Value<string>
+    export type prefix = _et.Optional_Value<string>
     
     export namespace attributes {
         
@@ -232,16 +232,16 @@ export namespace _T_XML_Element {
             export namespace namespace {
                 export type O = string
             }
-            export type namespace = _pt.Optional_Value<string>
+            export type namespace = _et.Optional_Value<string>
         }
         export type D = {
             readonly 'value': string
-            readonly 'namespace': _pt.Optional_Value<string>
+            readonly 'namespace': _et.Optional_Value<string>
         }
     }
     export type attributes = _i_core._T_Dictionary<null, {
         readonly 'value': string
-        readonly 'namespace': _pt.Optional_Value<string>
+        readonly 'namespace': _et.Optional_Value<string>
     }>
     
     export namespace content {
@@ -260,23 +260,23 @@ export namespace _T_XML_Document {
             export namespace encoding {
                 export type O = string
             }
-            export type encoding = _pt.Optional_Value<string>
+            export type encoding = _et.Optional_Value<string>
             
             export namespace standalone {
                 export type O = boolean
             }
-            export type standalone = _pt.Optional_Value<boolean>
+            export type standalone = _et.Optional_Value<boolean>
         }
         export type O = {
             readonly 'version': string
-            readonly 'encoding': _pt.Optional_Value<string>
-            readonly 'standalone': _pt.Optional_Value<boolean>
+            readonly 'encoding': _et.Optional_Value<string>
+            readonly 'standalone': _et.Optional_Value<boolean>
         }
     }
-    export type declaration = _pt.Optional_Value<{
+    export type declaration = _et.Optional_Value<{
         readonly 'version': string
-        readonly 'encoding': _pt.Optional_Value<string>
-        readonly 'standalone': _pt.Optional_Value<boolean>
+        readonly 'encoding': _et.Optional_Value<string>
+        readonly 'standalone': _et.Optional_Value<boolean>
     }>
     
     export namespace root_element {
@@ -303,12 +303,12 @@ export namespace _T_XML_Formatting_Options {
             export namespace max_line_length {
                 export type O = number
             }
-            export type max_line_length = _pt.Optional_Value<number>
+            export type max_line_length = _et.Optional_Value<number>
             export type preserve_mixed_content = boolean
         }
         export type pretty = {
             readonly 'indent': string
-            readonly 'max line length': _pt.Optional_Value<number>
+            readonly 'max line length': _et.Optional_Value<number>
             readonly 'preserve mixed content': boolean
         }
         
@@ -317,42 +317,42 @@ export namespace _T_XML_Formatting_Options {
             export namespace before_element {
                 export type O = string
             }
-            export type before_element = _pt.Optional_Value<string>
+            export type before_element = _et.Optional_Value<string>
             
             export namespace after_element {
                 export type O = string
             }
-            export type after_element = _pt.Optional_Value<string>
+            export type after_element = _et.Optional_Value<string>
             
             export namespace before_attribute {
                 export type O = string
             }
-            export type before_attribute = _pt.Optional_Value<string>
+            export type before_attribute = _et.Optional_Value<string>
             
             export namespace after_attribute {
                 export type O = string
             }
-            export type after_attribute = _pt.Optional_Value<string>
+            export type after_attribute = _et.Optional_Value<string>
         }
         export type custom = {
-            readonly 'before element': _pt.Optional_Value<string>
-            readonly 'after element': _pt.Optional_Value<string>
-            readonly 'before attribute': _pt.Optional_Value<string>
-            readonly 'after attribute': _pt.Optional_Value<string>
+            readonly 'before element': _et.Optional_Value<string>
+            readonly 'after element': _et.Optional_Value<string>
+            readonly 'before attribute': _et.Optional_Value<string>
+            readonly 'after attribute': _et.Optional_Value<string>
         }
     }
     export type SG = 
         | readonly ['compact', null]
         | readonly ['pretty', {
             readonly 'indent': string
-            readonly 'max line length': _pt.Optional_Value<number>
+            readonly 'max line length': _et.Optional_Value<number>
             readonly 'preserve mixed content': boolean
         }]
         | readonly ['custom', {
-            readonly 'before element': _pt.Optional_Value<string>
-            readonly 'after element': _pt.Optional_Value<string>
-            readonly 'before attribute': _pt.Optional_Value<string>
-            readonly 'after attribute': _pt.Optional_Value<string>
+            readonly 'before element': _et.Optional_Value<string>
+            readonly 'after element': _et.Optional_Value<string>
+            readonly 'before attribute': _et.Optional_Value<string>
+            readonly 'after attribute': _et.Optional_Value<string>
         }]
 }
 
@@ -396,7 +396,7 @@ export namespace Processing_Instruction {
     export namespace data {
         export type O = string
     }
-    export type data = _pt.Optional_Value<string>
+    export type data = _et.Optional_Value<string>
 }
 
 export namespace XML_Node {
@@ -482,12 +482,12 @@ export namespace XML_Element {
     export namespace namespace {
         export type O = string
     }
-    export type namespace = _pt.Optional_Value<string>
+    export type namespace = _et.Optional_Value<string>
     
     export namespace prefix {
         export type O = string
     }
-    export type prefix = _pt.Optional_Value<string>
+    export type prefix = _et.Optional_Value<string>
     
     export namespace attributes {
         
@@ -497,16 +497,16 @@ export namespace XML_Element {
             export namespace namespace {
                 export type O = string
             }
-            export type namespace = _pt.Optional_Value<string>
+            export type namespace = _et.Optional_Value<string>
         }
         export type D = {
             readonly 'value': string
-            readonly 'namespace': _pt.Optional_Value<string>
+            readonly 'namespace': _et.Optional_Value<string>
         }
     }
     export type attributes = _i_core._T_Dictionary<null, {
         readonly 'value': string
-        readonly 'namespace': _pt.Optional_Value<string>
+        readonly 'namespace': _et.Optional_Value<string>
     }>
     
     export namespace content {
@@ -525,23 +525,23 @@ export namespace XML_Document {
             export namespace encoding {
                 export type O = string
             }
-            export type encoding = _pt.Optional_Value<string>
+            export type encoding = _et.Optional_Value<string>
             
             export namespace standalone {
                 export type O = boolean
             }
-            export type standalone = _pt.Optional_Value<boolean>
+            export type standalone = _et.Optional_Value<boolean>
         }
         export type O = {
             readonly 'version': string
-            readonly 'encoding': _pt.Optional_Value<string>
-            readonly 'standalone': _pt.Optional_Value<boolean>
+            readonly 'encoding': _et.Optional_Value<string>
+            readonly 'standalone': _et.Optional_Value<boolean>
         }
     }
-    export type declaration = _pt.Optional_Value<{
+    export type declaration = _et.Optional_Value<{
         readonly 'version': string
-        readonly 'encoding': _pt.Optional_Value<string>
-        readonly 'standalone': _pt.Optional_Value<boolean>
+        readonly 'encoding': _et.Optional_Value<string>
+        readonly 'standalone': _et.Optional_Value<boolean>
     }>
     
     export namespace root_element {
@@ -568,12 +568,12 @@ export namespace XML_Formatting_Options {
             export namespace max_line_length {
                 export type O = number
             }
-            export type max_line_length = _pt.Optional_Value<number>
+            export type max_line_length = _et.Optional_Value<number>
             export type preserve_mixed_content = boolean
         }
         export type pretty = {
             readonly 'indent': string
-            readonly 'max line length': _pt.Optional_Value<number>
+            readonly 'max line length': _et.Optional_Value<number>
             readonly 'preserve mixed content': boolean
         }
         
@@ -582,41 +582,41 @@ export namespace XML_Formatting_Options {
             export namespace before_element {
                 export type O = string
             }
-            export type before_element = _pt.Optional_Value<string>
+            export type before_element = _et.Optional_Value<string>
             
             export namespace after_element {
                 export type O = string
             }
-            export type after_element = _pt.Optional_Value<string>
+            export type after_element = _et.Optional_Value<string>
             
             export namespace before_attribute {
                 export type O = string
             }
-            export type before_attribute = _pt.Optional_Value<string>
+            export type before_attribute = _et.Optional_Value<string>
             
             export namespace after_attribute {
                 export type O = string
             }
-            export type after_attribute = _pt.Optional_Value<string>
+            export type after_attribute = _et.Optional_Value<string>
         }
         export type custom = {
-            readonly 'before element': _pt.Optional_Value<string>
-            readonly 'after element': _pt.Optional_Value<string>
-            readonly 'before attribute': _pt.Optional_Value<string>
-            readonly 'after attribute': _pt.Optional_Value<string>
+            readonly 'before element': _et.Optional_Value<string>
+            readonly 'after element': _et.Optional_Value<string>
+            readonly 'before attribute': _et.Optional_Value<string>
+            readonly 'after attribute': _et.Optional_Value<string>
         }
     }
     export type SG = 
         | readonly ['compact', null]
         | readonly ['pretty', {
             readonly 'indent': string
-            readonly 'max line length': _pt.Optional_Value<number>
+            readonly 'max line length': _et.Optional_Value<number>
             readonly 'preserve mixed content': boolean
         }]
         | readonly ['custom', {
-            readonly 'before element': _pt.Optional_Value<string>
-            readonly 'after element': _pt.Optional_Value<string>
-            readonly 'before attribute': _pt.Optional_Value<string>
-            readonly 'after attribute': _pt.Optional_Value<string>
+            readonly 'before element': _et.Optional_Value<string>
+            readonly 'after element': _et.Optional_Value<string>
+            readonly 'before attribute': _et.Optional_Value<string>
+            readonly 'after attribute': _et.Optional_Value<string>
         }]
 }
