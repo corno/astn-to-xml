@@ -3,6 +3,6 @@
   "dependencies": {
     "exupery-core-dev": "^0.3.2",
     "pareto-fountain-pen": "^0.3.13",
-    "pareto-standard-operations": "^0.3.11"
+    "pareto-standard-operations": "^0.3.13"
   }
 }
